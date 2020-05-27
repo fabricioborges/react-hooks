@@ -15,14 +15,19 @@ interface IUser {
 }
 
 function App() {
+  const inputRef = useRef<HTMLInputElement>(null);
   const [users, setUsers] = useState<[IUser]>();
   const names = useMemo(() => users?.map(user => user.name).join(', ') || '', []);
   const greeting = useCallback((user: IUser) => alert(`Hello ${user.name}`), []);
 
-  return (
-    <div className="App">
+  function focusOnInput(){
+    inputRef.current?.focus();
+  }
 
-    </div>
+  return (
+    <form>
+      <input type="text" ref={inputRef}/>
+    </form>
   );
 }
 
